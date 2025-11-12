@@ -36,8 +36,8 @@ for m = 1:nm
 
     % Compose injections for this SOP (QSOP=0 at both sides)
     S = Sbase;
-    S(3) = complex(real(S(3)) + PSOP, imag(S(3)) + 0.0);  % +PSOP at bus 3
-    S(4) = complex(real(S(4)) - PSOP, imag(S(4)) + 0.0);  % -PSOP at bus 4
+    S(3) = complex(real(S(3)) - PSOP, imag(S(3)) + 0.0);  % +PSOP at bus 3
+    S(4) = complex(real(S(4)) + PSOP, imag(S(4)) + 0.0);  % -PSOP at bus 4
 
     % ---------------- NR iterations (same core as your code) ----------------
     theta = theta0; Vmag = Vmag0;       % warm-start from previous case
@@ -116,10 +116,10 @@ for i = 1:4
     plot(PSOP_vec(conv), abs(Vsave(i,conv)), 'LineWidth', 1.8, 'Color', cols(i,:));
 end
 yline(0.96,'k--','0.96 pu'); yline(1.04,'k--','1.04 pu');
-xlabel('P_{SOP} (pu)  [positive: 4 \rightarrow 3]');
+xlabel('P_{SOP} (pu)');
 ylabel('|V| (pu)');
 legend('Bus 1','Bus 2','Bus 3','Bus 4','Location','best');
-title('Bus voltages vs SOP active-power setpoint (Q_{SOP}=0)');
+title('Bus voltages vs SOP active-power setpoint');
 
 % ---------------- Report PSOP ranges keeping |V3| within [0.96, 1.04] pu ----------------
 stat = [0.96, 1.04];
